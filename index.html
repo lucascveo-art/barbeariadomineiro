@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbearia do Mineiro - 9 Anos de Tradição e Excelência</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Swiper.js (Para Carrossel de Depoimentos) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <style>
+        /* --- [ 1. Configuração Global e Variáveis ] --- */
+        :root {
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+            
+            --color-background: #F8F7F4; /* Papel Creme */
+            --color-text: #222222;      /* Cinza-Carvão */
+            --color-gold: #AE9A70;      /* Ouro Velho */
+            --color-white: #FFFFFF;
+            
+            --header-height: 80px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--color-text);
+            background-color: var(--color-background);
+            overflow-x: hidden; /* Prevenir scroll horizontal */
+        }
+        
+        /* Ocultar corpo até o preloader terminar */
+        body:not(.loaded) .main-content,
+        body:not(.loaded) .main-header {
+            opacity: 0;
+        }
+
+        /* --- [ 2. Layout (Container) ] --- */
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        section {
+            padding: 7rem 0;
+        }
+        
+        /* --- [ 3. Tipografia ] --- */
+        h1, h2 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            line-height: 1.2;
+            
+            /* SKILL: Efeito Letterpress (Baixo-Relevo) */
+            color: var(--color-gold); /* Cor Ouro Velho #AE9A70 */
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1), /* Sombra escura (profundidade) */
+                         -1px -1px 1px rgba(255, 255, 255, 0.7); /* Sombra clara (borda) */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            color: var(--color-text); /* Mantém H3/H4 como carvão */
+            line-height: 1.2;
+        }
+
+        h1 { font-size: clamp(3rem, 6vw, 5rem); } /* Responsivo */
+        h2 { font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: 3rem; text-align: center; }
+        h3 { font-size: clamp(1.25rem, 3vw, 1.5rem); font-family: var(--font-body); font-weight: 300; }
+        p { margin-bottom: 1.5rem; }
+        a { color: var(--color-gold); text-decoration: none; }
+
+        /* --- [ 4. Componentes (Botão CTA) ] --- */
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--color-background);
+            background-color: var(--color-gold);
+            border: 1px solid var(--color-gold);
+            border-radius: 4px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+            
+            /* NOVO: Animação de Pulso Dourado */
+            /* A animação 'pulseGold' é definida abaixo */
+            animation: pulseGold 2.5s infinite cubic-bezier(0.66, 0, 0, 1);
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--color-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        .cta-button.hero-cta:hover {
+            background-color: var(--color-gold);
+            color: var(--color-white);
+            border-color: var(--color-white);
+        }
+
+        /* NOVO: Definição da Animação de Pulso */
+        @keyframes pulseGold {
+            0% {
+                /* Sombra dourada, sem expansão, opacidade média */
+                box-shadow: 0 0 0 0 rgba(174, 154, 112, 0.6); /* --color-gold com alpha */
+            }
+            70% {
+                /* Sombra expandida (12px) e desaparecendo */
+                box-shadow: 0 0 0 12px rgba(174, 154, 112, 0);
+            }
+            100% {
+                /* Sombra reinicia */
+                box-shadow: 0 0 0 0 rgba(174, 154, 112, 0);
+            }
+        }
+
+        /* --- [ 5. SKILL: Animações de Scroll (Fade/Split) ] --- */
+        
+        /* 5a. Fade In Up (Genérico) */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1), 
+                        transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 5b. Split Text (Títulos) */
+        .split-text-line {
+            display: block;
+            overflow: hidden;
+        }
+        
+        .split-text-inner {
+            display: block;
+            transform: translateY(110%);
+            transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        .split-text.is-visible .split-text-inner {
+            transform: translateY(0);
+        }
+        
+        /* Delay escalonado para linhas */
+        .split-text.is-visible .split-text-line:nth-child(2) .split-text-inner { transition-delay: 0.1s; }
+        .split-text.is-visible .split-text-line:nth-child(3) .split-text-inner { transition-delay: 0.2s; }
+
+
+        /* --- [ 6. SKILL: Preloader ] --- */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-background);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.8s ease 0.5s, visibility 0.8s ease 0.5s;
+        }
+        
+        .preloader-logo {
+            width: 150px;
+            height: 150px;
+            animation: colorizeLogo 2s ease-in-out forwards;
+        }
+
+        @keyframes colorizeLogo {
+            0% {
+                /* Simula P&B (preto e branco) */
+                filter: grayscale(100%) opacity(0);
+                transform: scale(0.95);
+            }
+            30% {
+                filter: grayscale(100%) opacity(1);
+                transform: scale(1);
+            }
+            70% {
+                /* Colore para a cor original (que é ouro/preto) */
+                filter: grayscale(0%) opacity(1);
+                transform: scale(1);
+            }
+            100% {
+                filter: grayscale(0%) opacity(1);
+                transform: scale(1);
+            }
+        }
+        
+        /* Esconder preloader quando o body tiver a classe 'loaded' */
+        body.loaded .preloader {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Mostrar conteúdo após o 'loaded' */
+        body.loaded .main-content,
+        body.loaded .main-header {
+            opacity: 1;
+            transition: opacity 0.5s ease 0.2s;
+        }
+
+
+        /* --- [ 7. Header (Navegação Fixa) ] --- */
+        .main-header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            background-color: var(--color-background);
+            z-index: 100;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .main-header.scrolled {
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        
+        .main-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+        
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-text);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+        
+        .nav-links a {
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-text);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--color-gold);
+            transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-gold);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .header-cta .cta-button {
+            padding: 0.75rem 1.5rem;
+        }
+
+        .burger-menu {
+            display: none; /* Oculto em desktop */
+            cursor: pointer;
+            z-index: 101;
+        }
+        
+        .burger-menu div {
+            width: 25px;
+            height: 2px;
+            background-color: var(--color-text);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* --- [ 8. Seção: Hero ] --- */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color-white);
+            
+            /* IMAGEM ATUALIZADA AQUI */
+            background-image: url('https://i.imgur.com/JzzXvMy.jpg'); 
+            
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Efeito Parallax simples */
+            position: relative;
+            padding: 0;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding-top: var(--header-height); /* Compensar header */
+        }
+        
+        .hero-content h1, .hero-content h3 {
+            color: var(--color-white);
+        }
+        
+        .hero-content h3 {
+            margin: 3rem 0 3rem 0; /* Aumentei as margens verticais para 3rem */
+            max-width: 600px;
+        }
+
+        /* NOVO: Indicador de Scroll Down */
+        .scroll-down-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            cursor: pointer;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .scroll-mouse {
+            width: 28px;
+            height: 48px;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            border-radius: 14px;
+            position: relative;
+            animation: floatBounce 2.5s ease-in-out infinite;
+        }
+        
+        .scroll-wheel {
+            width: 4px;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 2px;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scrollWheel 1.8s ease-in-out infinite;
+        }
+
+        @keyframes floatBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+        
+        @keyframes scrollWheel {
+            0% { top: 8px; opacity: 1; }
+            80%, 100% { top: 24px; opacity: 0; }
+        }
+        /* FIM: Indicador de Scroll Down */
+
+
+        /* --- [ 9. SKILL: Seção Sobre (Scrollytelling) ] --- */
+        #sobre {
+            background-color: var(--color-white);
+        }
+        
+        .scrollytelling-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            position: relative;
+            align-items: flex-start;
+        }
+        
+        .scrolly-image-container {
+            position: sticky;
+            top: 120px; /* Abaixo do header */
+            height: 70vh;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+        }
+        
+        .scrolly-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+            transform: scale(1.05);
+        }
+        
+        .scrolly-image.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .scrolly-text-block {
+            min-height: 60vh; /* Controla o "tempo" de scroll */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0.4;
+            transition: opacity 0.4s ease;
+        }
+
+        /* Destaca o bloco de texto ativo (opcional, mas bom) */
+        .scrolly-text-block.is-in-view {
+             opacity: 1;
+        }
+        
+        .scrolly-text-block h3 {
+            font-size: 1.8rem;
+            color: var(--color-gold);
+            margin-bottom: 1rem;
+        }
+
+        /* --- [ 10. Seção: Serviços ] --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: var(--color-white);
+            border: 1px solid #EAEAEA;
+            border-radius: 8px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: scale(1.02) translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+        }
+        
+        .service-card .icon {
+            font-size: 2.5rem;
+            color: var(--color-gold);
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .service-card p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        /* Destaque para "Área Kids" */
+        .service-card.highlight {
+            border: 2px solid var(--color-gold);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card.highlight::before {
+            content: 'EXCLUSIVO';
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: var(--color-gold);
+            color: var(--color-white);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 30px;
+            transform: rotate(45deg);
+            letter-spacing: 0.5px;
+        }
+
+        /* --- [ 11. Seção: Depoimentos (Swiper) ] --- */
+        .testimonial-slider-container {
+            position: relative;
+            padding-bottom: 4rem; /* Espaço para paginação */
+        }
+        
+        .testimonial-slider .swiper-slide {
+            background: var(--color-white);
+            border: 1px solid #EAEAEA;
+            border-radius: 8px;
+            padding: 2.5rem;
+            height: auto; /* Deixa o Swiper calcular */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .testimonial-quote {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            line-height: 1.4;
+            margin-bottom: 1.5rem;
+            color: #444;
+        }
+        
+        .testimonial-author {
+            font-weight: 700;
+            font-family: var(--font-body);
+            color: var(--color-gold);
+            margin-top: auto; /* Empurra para baixo */
+        }
+        
+        /* Estilo da Paginação do Swiper */
+        .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background: #ccc;
+            opacity: 1;
+        }
+        
+        .swiper-pagination-bullet-active {
+            background: var(--color-gold);
+        }
+
+        /* --- [ 12. Seção: Localização (Footer) ] --- */
+        #localizacao {
+            background-color: var(--color-text);
+            color: rgba(255, 255, 255, 0.7);
+            padding-bottom: 0;
+        }
+        
+        #localizacao h2 {
+            color: var(--color-white);
+        }
+        
+        .footer-wrapper {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+        }
+        
+        .map-container {
+            width: 100%;
+            height: 450px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #444;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            /* SKILL: Filtro de Vibe no Mapa */
+            filter: grayscale(100%) sepia(20%) invert(90%);
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            color: var(--color-white);
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        
+        .contact-info strong {
+            color: var(--color-white);
+            font-weight: 400;
+        }
+        
+        .social-links {
+            margin: 2rem 0;
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--color-gold);
+        }
+        
+        .social-links svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+        
+        .footer-cta {
+            margin-top: 2rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding: 2.5rem 0;
+            margin-top: 5rem;
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* --- [ 13. Responsividade (Mobile) ] --- */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .masonry-gallery {
+                column-count: 2;
+            }
+            .footer-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .map-container {
+                height: 350px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 0;
+            }
+            
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; margin-bottom: 2rem; }
+
+            /* Menu Burger */
+            .burger-menu {
+                display: block;
+            }
+            
+            .header-cta {
+                display: none; /* Esconde CTA do header */
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 70%;
+                height: 100vh;
+                background: var(--color-background);
+                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transform: translateX(100%);
+                transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            }
+            
+            .nav-links.active {
+                transform: translateX(0);
+            }
+            
+            .nav-links a {
+                font-size: 1.2rem;
+            }
+
+            /* Animação do Burger */
+            .burger-menu.active .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            .burger-menu.active .line2 {
+                opacity: 0;
+            }
+            .burger-menu.active .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            /* Scrollytelling (Stack) */
+            .scrollytelling-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .scrolly-image-container {
+                position: relative; /* Não mais sticky */
+                top: 0;
+                height: 50vh;
+                width: 100%;
+                margin-bottom: 2rem;
+            }
+            .scrolly-text-block {
+                min-height: auto;
+                margin-bottom: 10vh; /* Espaçamento entre blocos */
+            }
+
+            /* Grids (Stack) */
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .masonry-gallery {
+                column-count: 1;
+            }
+            
+            /* Depoimentos */
+            .testimonial-slider .swiper-slide {
+                padding: 1.5rem;
+            }
+            .testimonial-quote {
+                font-size: 1.2rem;
+            }
+            
+            /* Footer */
+            .footer-wrapper {
+                gap: 3rem;
+            }
+            .contact-info {
+                text-align: center;
+            }
+            .social-links {
+                justify-content: center;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <!-- [ SKILL 1: Preloader ] -->
+    <div class="preloader">
+        <!-- 
+            NOTA: Usei um placeholder que simula seu logo. 
+            Substitua 'src' pelo URL do seu arquivo de logo (ex: logo.png ou logo.svg) 
+        -->
+        <img src="https://placehold.co/150x150/222222/AE9A70?text=BM&font=playfairdisplay" 
+             alt="Logo Barbearia do Mineiro" 
+             class="preloader-logo"
+             onerror="this.src='https://placehold.co/150x150/222222/AE9A70?text=BM&font=playfairdisplay';">
+    </div>
+
+    <!-- [ Header Fixo ] -->
+    <header class="main-header" id="main-header">
+        <nav class="container main-nav">
+            <a href="#hero" class="logo">
+                Barbearia do Mineiro
+            </a>
+            
+            <div class="nav-links" id="nav-links">
+                <a href="#sobre">Nossa História</a>
+                <a href="#servicos">Serviços</a>
+                <a href="#localizacao">Contato</a>
+            </div>
+            
+            <div class="header-cta">
+                <a href="https://wa.me/5541995317757" target="_blank" class="cta-button">Agendar Agora</a>
+            </div>
+            
+            <div class="burger-menu" id="burger-menu">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- [ Conteúdo Principal ] -->
+    <main class="main-content">
+
+        <!-- [ Seção Hero ] -->
+        <section id="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-content container">
+                
+                <!-- SKILL 2: Animação Split Text -->
+                <h1 class="split-text">
+                    <span class="split-text-line"><span class="split-text-inner">Barbearia do Mineiro</span></span>
+                </h1>
+                
+                <!-- SKILL 5: Animação Fade In Up -->
+                <h3 class="fade-in-up" data-delay="100">
+                    9 Anos de Excelência e Tradição Familiar.
+                </h3>
+                
+                <div class="fade-in-up" data-delay="200">
+                    <a href="https://wa.me/5541995317757" target="_blank" class="cta-button hero-cta">Agendar Agora</a>
+                </div>
+            </div>
+            
+            <!-- NOVO: Indicador de Scroll -->
+            <a href="#sobre" class="scroll-down-indicator" aria-label="Rolar para baixo">
+                <div class="scroll-mouse">
+                    <div class="scroll-wheel"></div>
+                </div>
+            </a>
+            
+        </section>
+
+        <!-- [ SKILL 3: Seção Sobre (Scrollytelling) ] -->
+        <section id="sobre">
+            <div class="container">
+                <h2 class="split-text">
+                    <span class="split-text-line"><span class="split-text-inner">O Artesanato</span></span>
+                    <span class="split-text-line"><span class="split-text-inner">de Gerações</span></span>
+                </h2>
+                
+                <div class="scrollytelling-wrapper">
+                    <!-- Coluna de Imagens Fixa (Sticky) -->
+                    <div class="scrolly-image-container fade-in-up">
+                        
+                        <!-- IMAGEM ATUALIZADA AQUI -->
+                        <img src="https://i.imgur.com/5zi7ayN.png" 
+                             alt="Interior da Barbearia do Mineiro" 
+                             class="scrolly-image active" 
+                             id="scrolly-img-1">
+                             
+                        <img src="https://i.imgur.com/DigDEqd.png" 
+                             alt="Detalhe de corte e barba" 
+                             class="scrolly-image" 
+                             id="scrolly-img-2">
+                    </div>
+                    
+                    <!-- Coluna de Texto Rolável -->
+                    <div class="scrolly-text-content">
+                        
+                        <!-- Bloco 1 -->
+                        <div class="scrolly-text-block" data-image-target="scrolly-img-1">
+                            <h3>Desde 2015</h3>
+                            <p>Desde 2015, a Barbearia do Mineiro não é apenas um lugar para cortar o cabelo. É onde a tradição do ofício encontra a comunidade. Começamos com uma cadeira e um sonho: trazer a excelência do barbeiro clássico para Campina Grande do Sul.</p>
+                        </div>
+                        
+                        <!-- Bloco 2 -->
+                        <div class="scrolly-text-block" data-image-target="scrolly-img-2">
+                            <h3>Mais que um Corte</h3>
+                            <p>Somos um ponto de encontro. Um lugar para pausar, desfrutar de uma boa conversa e cuidar do visual. É o seu momento.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ Seção Serviços ] -->
+        <section id="servicos">
+            <div class="container">
+                <h2 class="split-text">
+                    <span class="split-text-line"><span class="split-text-inner">Nossos Rituais</span></span>
+                </h2>
+                
+                <div class="services-grid">
+                    <!-- Card 1 -->
+                    <div class="service-card fade-in-up" data-delay="0">
+                        <span class="icon">💈</span>
+                        <h3>Corte Clássico</h3>
+                        <p>Precisão na tesoura e navalha, respeitando seu estilo, do tradicional ao moderno.</p>
+                    </div>
+                    
+                    <!-- Card 3 (Destaque) - (Era data-delay="200") -->
+                    <div class="service-card highlight fade-in-up" data-delay="100">
+                        <span class="icon">🚀</span>
+                        <h3>Área Kids</h3>
+                        <p>Cadeiras especiais e paciência de mestre para o primeiro corte dos futuros cavalheiros.</p>
+                    </div>
+
+                    <!-- Card 5 (era Card 4) - (Era data-delay="300") -->
+                    <div class="service-card fade-in-up" data-delay="200">
+                        <span class="icon">💆‍♂️</span>
+                        <h3>Tratamentos</h3>
+                        <p>Hidratação, pigmentação e cuidados especiais para cabelo e barba.</p>
+                    </div>
+                    
+                    <!-- Card 6 (era Card 5) - (Era data-delay="400") -->
+                    <div class="service-card fade-in-up" data-delay="300">
+                        <span class="icon">🤝</span>
+                        <h3>Pai & Filho</h3>
+                        <p>Um momento especial para fortalecer laços e criar memórias.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ Seção Depoimentos (Swiper) ] -->
+        <section id="depoimentos">
+            <div class="container">
+                <h2 class="split-text">
+                    <span class="split-text-line"><span class="split-text-inner">Nossa Comunidade</span></span>
+                </h2>
+                
+                <div class="testimonial-slider-container fade-in-up">
+                    <!-- Swiper -->
+                    <div class="swiper testimonial-slider">
+                        <div class="swiper-wrapper">
+                            <!-- Slide 1 -->
+                            <div class="swiper-slide">
+                                <p class="testimonial-quote">"Sem dúvida a melhor barbearia da região. O Mineiro não corta cabelo, ele faz arte. Atendimento impecável e ambiente nota 10."</p>
+                                <p class="testimonial-author">- João P.</p>
+                            </div>
+                            <!-- Slide 2 -->
+                            <div class="swiper-slide">
+                                <p class="testimonial-quote">"Levo meu filho desde o primeiro corte. A paciência e o carinho da equipe com as crianças é incrível. O espaço kids é excelente!"</p>
+                                <p class="testimonial-author">- Ricardo M.</p>
+                            </div>
+                            <!-- Slide 3 -->
+                            <div class="swiper-slide">
+                                <p class="testimonial-quote">"Ambiente familiar, profissional de primeira. Me sinto em casa toda vez que vou."</p>
+                                <p class="testimonial-author">- Carlos A.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Paginação -->
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ Seção Localização (Footer Expandido) ] -->
+        <section id="localizacao">
+            <div class="container">
+                <h2 class="split-text">
+                    <span class="split-text-line"><span class="split-text-inner">Visite a Família</span></span>
+                </h2>
+                
+                <div class="footer-wrapper">
+                    <!-- Coluna 1: Mapa -->
+                    <div class="map-container fade-in-up">
+                        <!-- 
+                          LINK ATUALIZADO (Dinocortkids)
+                        -->
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3605.326298516104!2d-49.1099583!3d-25.35674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dcebcd538a2b2b%3A0xf630c76a37f049f5!2sDinocortkids!5e0!3m2!1spt-BR!2sbr!4v1731883151834!5m2!1spt-BR!2sbr" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    
+                    <!-- Coluna 2: Contatos -->
+                    <div class="contact-info fade-in-up" data-delay="200">
+                        <h3>Onde Estamos</h3>
+                        <p>
+                            <strong>Endereço:</strong><br>
+                            Rua Lucídio Florêncio Ribeiro, 378 - Jardim Graciosa<br>
+                            Campina Grande do Sul - PR, 83410-000
+                        </p>
+                        <p>
+                            <strong>Horários:</strong><br>
+                            Segunda a Sábado: <strong>9:00 - 20:00</strong><br>
+                            Domingo: Fechado
+                        </p>
+                        
+                        <div class="social-links">
+                            <!-- SVG Ícone WhatsApp -->
+                            <a href="https://wa.me/5541995317757" target="_blank">
+                                <!-- NOVO SVG INSERIDO AQUI -->
+                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 32 32">
+                                <title>whatsapp</title>
+                                <path d="M26.576 5.363c-2.69-2.69-6.406-4.354-10.511-4.354-8.209 0-14.865 6.655-14.865 14.865 0 2.732 0.737 5.291 2.022 7.491l-0.038-0.070-2.109 7.702 7.879-2.067c2.051 1.139 4.498 1.809 7.102 1.809h0.006c8.209-0.003 14.862-6.659 14.862-14.868 0-4.103-1.662-7.817-4.349-10.507l0 0zM16.062 28.228h-0.005c-0 0-0.001 0-0.001 0-2.319 0-4.489-0.64-6.342-1.753l0.056 0.031-0.451-0.267-4.675 1.227 1.247-4.559-0.294-0.467c-1.185-1.862-1.889-4.131-1.889-6.565 0-6.822 5.531-12.353 12.353-12.353s12.353 5.531 12.353 12.353c0 6.822-5.53 12.353-12.353 12.353h-0zM22.838 18.977c-0.371-0.186-2.197-1.083-2.537-1.208-0.341-0.124-0.589-0.185-0.837 0.187-0.246 0.371-0.958 1.207-1.175 1.455-0.216 0.249-0.434 0.279-0.805 0.094-1.15-0.466-2.138-1.087-2.997-1.852l0.010 0.009c-0.799-0.74-1.484-1.587-2.037-2.521l-0.028-0.052c-0.216-0.371-0.023-0.572 0.162-0.757 0.167-0.166 0.372-0.434 0.557-0.65 0.146-0.179 0.271-0.384 0.366-0.604l0.006-0.017c0.043-0.087 0.068-0.188 0.068-0.296 0-0.131-0.037-0.253-0.101-0.357l0.002 0.003c-0.094-0.186-0.836-2.014-1.145-2.758-0.302-0.724-0.609-0.625-0.836-0.637-0.216-0.010-0.464-0.012-0.712-0.012-0.395 0.010-0.746 0.188-0.988 0.463l-0.001 0.002c-0.802 0.761-1.3 1.834-1.3 3.023 0 0.026 0 0.053 0.001 0.079l-0-0.004c0.131 1.467 0.681 2.784 1.527 3.857l-0.012-0.015c1.604 2.379 3.742 4.282 6.251 5.564l0.094 0.043c0.548 0.248 1.25 0.513 1.968 0.74l0.149 0.041c0.442 0.14 0.951 0.221 1.479 0.221 0.303 0 0.601-0.027 0.889-0.078l-0.031 0.004c1.069-0.223 1.956-0.868 2.497-1.749l0.009-0.017c0.165-0.366 0.261-0.793 0.261-1.242 0-0.185-0.016-0.366-0.047-0.542l0.003 0.019c-0.092-0.155-0.34-0.247-0.712-0.434z"></path>
+                                </svg>
+                                WhatsApp
+                            </a>
+                            <!-- SVG Ícone Instagram -->
+                            <a href="https://www.instagram.com/barbeariadomineiro.ofc" target="_blank">
+                                <!-- NOVO SVG DO INSTAGRAM INSERIDO AQUI -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/></svg>
+                                Instagram
+                            </a>
+                        </div>
+                        
+                        <div class="footer-cta">
+                            <a href="https://wa.me/5541995317757" target="_blank" class="cta-button">Agendar Agora</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="copyright">
+                    &copy; <span id="current-year"></span> Barbearia do Mineiro. Todos os direitos reservados.
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Swiper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- JavaScript Embutido -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- [ 1. SKILL: Preloader ] ---
+            window.addEventListener('load', () => {
+                // O 'load' espera todas as imagens. O 'DOMContentLoaded' não.
+                // O delay na animação do preloader (2s) dá tempo para o 'load'
+                // A transição de 'opacity' do preloader tem um delay de 0.5s
+                // Total: ~2.5s de preloader
+                setTimeout(() => {
+                    document.body.classList.add('loaded');
+                }, 2000); // Garante que a animação do logo termine
+            });
+            
+            // --- [ 2. Header (Fixo e Burger) ] ---
+            const header = document.getElementById('main-header');
+            const burger = document.getElementById('burger-menu');
+            const navLinks = document.getElementById('nav-links');
+            
+            // Sombra no scroll
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Menu Burger
+            burger.addEventListener('click', () => {
+                burger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+            
+            // Fechar menu ao clicar no link (para mobile)
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    burger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // --- [ 3. SKILL: Animações de Scroll (Observer Genérico) ] ---
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // 10% do item visível
+            };
+
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Adiciona delay se especificado
+                        const delay = entry.target.dataset.delay || 0;
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, delay);
+                        
+                        // Para de observar após animar
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            const generalObserver = new IntersectionObserver(observerCallback, observerOptions);
+            
+            // Observar todos os elementos com 'fade-in-up' e 'split-text'
+            document.querySelectorAll('.fade-in-up, .split-text').forEach(el => {
+                generalObserver.observe(el);
+            });
+            
+            // --- [ 4. SKILL: Scrollytelling (Observer Específico) ] ---
+            const scrollyObserverOptions = {
+                root: null,
+                rootMargin: '-50% 0px -50% 0px', // Ativa quando o item está no meio da tela
+                threshold: 0
+            };
+            
+            const scrollyCallback = (entries) => {
+                entries.forEach(entry => {
+                    const targetId = entry.target.dataset.imageTarget;
+                    const targetImage = document.getElementById(targetId);
+                    
+                    if (entry.isIntersecting) {
+                        // Remove 'active' de todas as imagens
+                        document.querySelectorAll('.scrolly-image.active').forEach(img => {
+                            img.classList.remove('active');
+                        });
+                        
+                        // Adiciona 'active' à imagem alvo
+                        if (targetImage) {
+                            targetImage.classList.add('active');
+                        }
+                        
+                        // (Opcional) Destaca o bloco de texto
+                        entry.target.classList.add('is-in-view');
+                        
+                    } else {
+                         entry.target.classList.remove('is-in-view');
+                    }
+                });
+            };
+            
+            const scrollyObserver = new IntersectionObserver(scrollyCallback, scrollyObserverOptions);
+            
+            document.querySelectorAll('.scrolly-text-block').forEach(block => {
+                scrollyObserver.observe(block);
+            });
+
+            // --- [ 5. Depoimentos (Swiper) ] ---
+            new Swiper('.testimonial-slider', {
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                slidesPerView: 1,
+                spaceBetween: 30,
+                breakpoints: {
+                    // quando a tela for >= 768px
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 30
+                    },
+                    // quando a tela for >= 1024px
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 30
+                    }
+                }
+            });
+            
+            // --- [ 6. Ano Atual (Copyright) ] ---
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        });
+    </script>
+
+</body>
+</html>
