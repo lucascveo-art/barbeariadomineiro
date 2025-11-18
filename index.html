@@ -353,7 +353,7 @@
             text-align: center;
             color: var(--color-white);
             
-            /* IMAGEM ATUALIZADA AQUI */
+            /* FOTO ORIGINAL RESTAURADA */
             background-image: url('https://i.imgur.com/HoXpCH8.png'); 
             
             background-size: cover;
@@ -520,10 +520,30 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.07);
         }
         
-        .service-card .icon {
-            font-size: 2.5rem;
-            color: var(--color-gold);
+        /* NOVO: Estilo para Imagem no Card de Serviço (Placeholder) */
+        .service-card-image {
+            width: 100%;
+            height: 200px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
             margin-bottom: 1.5rem;
+        }
+        
+        .service-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .service-card:hover .service-card-image img {
+            transform: scale(1.1); /* Zoom suave ao passar o mouse */
+        }
+
+        .service-card .icon {
+            /* Ocultando ícones antigos, pois agora temos imagens */
+            display: none; 
         }
         
         .service-card h3 {
@@ -534,6 +554,16 @@
         .service-card p {
             font-size: 0.95rem;
             margin-bottom: 0;
+        }
+
+        /* NOVO: Estilo para o Preço */
+        .service-card .price {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 1.8rem; /* Grande e visível */
+            color: var(--color-gold);
+            font-weight: 700;
+            margin-top: 1rem;
         }
 
         /* Destaque para "Área Kids" */
@@ -892,9 +922,7 @@
                     <!-- Coluna de Imagens Fixa (Sticky) -->
                     <div class="scrolly-image-container fade-in-up">
                         
-                        <!-- IMAGEM ATUALIZADA AQUI -->
-                        <!-- A imagem '5zi7ayN.png' foi removida -->
-                             
+                        <!-- FOTO ORIGINAL RESTAURADA -->
                         <img src="https://i.imgur.com/DigDEqd.png" 
                              alt="Detalhe de corte e barba" 
                              class="scrolly-image active" 
@@ -921,36 +949,59 @@
         <section id="servicos">
             <div class="container">
                 <h2 class="split-text">
-                    <span class="split-text-line"><span class="split-text-inner">Nossos Rituais</span></span>
+                    <span class="split-text-line"><span class="split-text-inner">Serviços</span></span>
                 </h2>
                 
                 <div class="services-grid">
-                    <!-- Card 1 -->
+                    <!-- Card 1: Corte -->
                     <div class="service-card fade-in-up" data-delay="0">
-                        <span class="icon">💈</span>
-                        <h3>Corte Clássico</h3>
-                        <p>Precisão na tesoura e navalha, respeitando seu estilo, do tradicional ao moderno.</p>
+                        <div class="service-card-image">
+                            <!-- FOTO ATUALIZADA AQUI -->
+                            <img src="https://i.imgur.com/kkrzM55.png" alt="Foto Corte">
+                        </div>
+                        <h3>Corte</h3>
+                        <span class="price">R$ 35,00</span>
                     </div>
                     
-                    <!-- Card 3 (Destaque) - (Era data-delay="200") -->
-                    <div class="service-card highlight fade-in-up" data-delay="100">
-                        <span class="icon">🚀</span>
-                        <h3>Área Kids</h3>
-                        <p>Nosso salão de beleza infantil oferece uma experiência divertida e acolhedora para crianças de todas as idades. Com um ambiente colorido e lúdico, profissionais especializados garantem cortes de cabelo, penteados e cuidados com toda a delicadeza e paciência que os pequenos merecem. Aqui, cada visita se transforma em uma aventura, unindo estilo, conforto e muita diversão!</p>
+                    <!-- Card 2: Barba -->
+                    <div class="service-card fade-in-up" data-delay="100">
+                        <div class="service-card-image">
+                            <!-- FOTO ATUALIZADA AQUI -->
+                            <img src="https://i.imgur.com/KKyIVgx.png" alt="Foto Barba">
+                        </div>
+                        <h3>Barba</h3>
+                        <span class="price">R$ 35,00</span>
                     </div>
 
-                    <!-- Card 5 (era Card 4) - (Era data-delay="300") -->
-                    <div class="service-card fade-in-up" data-delay="200">
-                        <span class="icon">💆‍♂️</span>
-                        <h3>Tratamentos</h3>
-                        <p>Hidratação, pigmentação e cuidados especiais para cabelo e barba.</p>
+                    <!-- Card 3: 1º Corte Infantil (Destaque) -->
+                    <div class="service-card highlight fade-in-up" data-delay="200">
+                        <div class="service-card-image">
+                            <!-- FOTO ATUALIZADA AQUI -->
+                            <img src="https://i.imgur.com/gdErwRf.png" alt="Foto Kids">
+                        </div>
+                        <h3>1º Corte Infantil</h3>
+                        <p>Experiência completa com certificado de primeiro corte incluso.</p>
+                        <span class="price">R$ 45,00</span>
+                    </div>
+
+                    <!-- Card 4: Selagem -->
+                    <div class="service-card fade-in-up" data-delay="300">
+                        <div class="service-card-image">
+                            <!-- FOTO ATUALIZADA AQUI -->
+                            <img src="https://i.imgur.com/gdSMmLS.png" alt="Foto Selagem">
+                        </div>
+                        <h3>Selagem</h3>
+                        <span class="price">R$ 80,00</span>
                     </div>
                     
-                    <!-- Card 6 (era Card 5) - (Era data-delay="400") -->
-                    <div class="service-card fade-in-up" data-delay="300">
-                        <span class="icon">🤝</span>
-                        <h3>Pai & Filho</h3>
-                        <p>Um momento especial para fortalecer laços e criar memórias.</p>
+                    <!-- Card 5: Sobrancelha -->
+                    <div class="service-card fade-in-up" data-delay="400">
+                        <div class="service-card-image">
+                            <!-- FOTO ATUALIZADA AQUI -->
+                            <img src="https://i.imgur.com/IAD1pML.png" alt="Foto Sobrancelha">
+                        </div>
+                        <h3>Sobrancelha</h3>
+                        <span class="price">R$ 15,00</span>
                     </div>
                 </div>
             </div>
