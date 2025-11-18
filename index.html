@@ -513,11 +513,28 @@
             text-align: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.03);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            
+            /* NOVO: Aplica a animação de pulso */
+            animation: servicePulse 4s infinite ease-in-out;
+        }
+        
+        /* NOVO: Keyframes para o efeito pulsativo dos serviços */
+        @keyframes servicePulse {
+            0%, 100% {
+                box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            }
+            50% {
+                /* Glow dourado suave no meio do ciclo */
+                box-shadow: 0 8px 30px rgba(174, 154, 112, 0.25); 
+            }
         }
         
         .service-card:hover {
             transform: scale(1.02) translateY(-5px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+            
+            /* Pausa o pulso ao passar o mouse para focar no estado de hover */
+            animation: none;
         }
         
         /* NOVO: Estilo para Imagem no Card de Serviço (Placeholder) */
