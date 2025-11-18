@@ -518,6 +518,12 @@
             animation: servicePulse 4s infinite ease-in-out;
         }
         
+        /* CLASSE NOVA PARA CARD COMPACTO (SEM IMAGEM) */
+        .service-card.compact {
+            padding: 1.5rem; /* Menor padding */
+            align-self: start; /* Evita que o card estique na altura */
+        }
+        
         /* NOVO: Keyframes para o efeito pulsativo dos serviços */
         @keyframes servicePulse {
             0%, 100% {
@@ -1065,12 +1071,9 @@
                         <span class="price">R$ 45,00</span>
                     </div>
 
-                    <!-- Card 4: Selagem -->
-                    <div class="service-card fade-in-up" data-delay="300">
-                        <div class="service-card-image">
-                            <!-- FOTO ATUALIZADA AQUI -->
-                            <img src="https://i.imgur.com/gdSMmLS.png" alt="Foto Selagem">
-                        </div>
+                    <!-- Card 4: Selagem (COMPACTO) -->
+                    <div class="service-card compact fade-in-up" data-delay="300">
+                        <!-- [IMAGEM REMOVIDA] -->
                         <h3>Selagem</h3>
                         <span class="price">R$ 80,00</span>
                     </div>
@@ -1079,7 +1082,7 @@
                     <div class="service-card fade-in-up" data-delay="400">
                         <div class="service-card-image">
                             <!-- FOTO ATUALIZADA AQUI -->
-                            <img src="https://i.imgur.com/IAD1pML.png" alt="Foto Sobrancelha">
+                            <img src="https://i.imgur.com/WgJnvrj.png" alt="Foto Sobrancelha">
                         </div>
                         <h3>Sobrancelha</h3>
                         <span class="price">R$ 15,00</span>
@@ -1315,7 +1318,7 @@
                         // Remove 'active' de todas as imagens
                         document.querySelectorAll('.scrolly-image.active').forEach(img => {
                             img.classList.remove('active');
-});
+                        });
                         
                         // Adiciona 'active' à imagem alvo
                         if (targetImage) {
