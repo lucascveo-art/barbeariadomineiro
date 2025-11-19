@@ -220,6 +220,8 @@
         .preloader-logo {
             width: 150px;
             height: 150px;
+            /* Adicionei object-fit para garantir que a logo não fique distorcida se não for quadrada */
+            object-fit: contain;
             animation: colorizeLogo 2s ease-in-out forwards;
         }
 
@@ -929,13 +931,11 @@
     <!-- [ SKILL 1: Preloader ] -->
     <div class="preloader">
         <!-- 
-            NOTA: Usei um placeholder que simula seu logo. 
-            Substitua 'src' pelo URL do seu arquivo de logo (ex: logo.png ou logo.svg) 
+             LOGO ATUALIZADA PARA A IMAGEM SOLICITADA
         -->
-        <img src="https://placehold.co/150x150/222222/AE9A70?text=BM&font=playfairdisplay" 
+        <img src="https://i.imgur.com/4nR468Q.png" 
              alt="Logo Barbearia do Mineiro" 
-             class="preloader-logo"
-             onerror="this.src='https://placehold.co/150x150/222222/AE9A70?text=BM&font=playfairdisplay';">
+             class="preloader-logo">
     </div>
 
     <!-- [ Header Fixo ] -->
@@ -949,6 +949,7 @@
                 <a href="#sobre">Nossa História</a>
                 <a href="#servicos">Serviços</a>
                 <!-- [NOVO ITEM MENU] -->
+                <a href="#produtos">Produtos</a>
                 <a href="#galeria">Galeria</a>
                 <a href="#localizacao">Contato</a>
             </div>
@@ -1087,6 +1088,90 @@
                         <h3>Sobrancelha</h3>
                         <span class="price">R$ 15,00</span>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ NOVA SEÇÃO: Produtos (7 Itens) ] -->
+        <section id="produtos" style="background-color: #f4f1ea;"> <!-- Fundo levemente diferente para separar -->
+            <div class="container">
+                <h2 class="split-text">
+                    <span class="split-text-line"><span class="split-text-inner">Nossos</span></span>
+                    <span class="split-text-line"><span class="split-text-inner">Produtos</span></span>
+                </h2>
+                
+                <div class="services-grid"> <!-- Reutilizando o grid de serviços para manter o padrão -->
+                    
+                    <!-- Produto 1 -->
+                    <div class="service-card fade-in-up" data-delay="0">
+                        <div class="service-card-image">
+                            <!-- FOTO 1 -->
+                            <img src="https://i.imgur.com/aY0ndNV.png" alt="Produto 1">
+                        </div>
+                        <h3>Cera capilar modeladora</h3>
+                        <span class="price">R$ 30,00</span>
+                    </div>
+
+                    <!-- Produto 2 -->
+                    <div class="service-card fade-in-up" data-delay="100">
+                        <div class="service-card-image">
+                            <!-- FOTO 2 -->
+                            <img src="https://i.imgur.com/dM7jWYT.png" alt="Produto 2">
+                        </div>
+                        <h3>Cera capilar modeladora</h3>
+                        <span class="price">R$ 30,00</span>
+                    </div>
+
+                    <!-- Produto 3 -->
+                    <div class="service-card fade-in-up" data-delay="200">
+                        <div class="service-card-image">
+                            <!-- FOTO 3 -->
+                            <img src="https://i.imgur.com/4KgPyv6.png" alt="Produto 3">
+                        </div>
+                        <h3>Cera capilar modeladora</h3>
+                        <span class="price">R$ 30,00</span>
+                    </div>
+
+                    <!-- Produto 4 -->
+                    <div class="service-card fade-in-up" data-delay="0">
+                        <div class="service-card-image">
+                            <!-- FOTO 4 -->
+                            <img src="https://i.imgur.com/CFWicig.png" alt="Produto 4">
+                        </div>
+                        <h3>Óleo para Barbear</h3>
+                        <span class="price">R$ 30,00</span>
+                    </div>
+
+                    <!-- Produto 5 -->
+                    <div class="service-card fade-in-up" data-delay="100">
+                        <div class="service-card-image">
+                            <!-- FOTO 5 -->
+                            <img src="https://i.imgur.com/I1qn0ca.png" alt="Produto 5">
+                        </div>
+                        <h3>Shampoo</h3>
+                        <span class="price">R$ 30,00</span>
+                    </div>
+
+                    <!-- Produto 6 -->
+                    <div class="service-card fade-in-up" data-delay="200">
+                        <div class="service-card-image">
+                            <!-- FOTO 6 -->
+                            <img src="https://i.imgur.com/V97Fibj.png" alt="Produto 6">
+                        </div>
+                        <h3>Tônico Capilar</h3>
+                        <span class="price">R$ 30,00</span>
+                    </div>
+
+                    <!-- Produto 7 -->
+                    <div class="service-card fade-in-up" data-delay="0">
+                        <div class="service-card-image">
+                            <!-- FOTO 7 -->
+                            <img src="https://i.imgur.com/mUvrm7Y.png" alt="Produto 7">
+                        </div>
+                        <h3>Tônico Capilar</h3>
+                        <span class="price">R$ 30,00</span>
+                    </div>
+
                 </div>
             </div>
         </section>
